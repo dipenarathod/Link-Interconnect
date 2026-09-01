@@ -100,12 +100,23 @@ The master return signals depend on the currently latched slave:
 - [rtl/sv](rt;/sv) - SystemVerilog source for the interconnect
 - [tb/wb_1ms2s_interconnect](tb/wb_1ms2s_interconnect.sv) - Testbench for the SystemVerilog implementation of the interconnect. Testbench written in SystemVerilog.
 - [tb/wb_slave_stub](tb/wb_slave_stub.sv) - Simple Wishbone peripheral slave written in SystemVerilog to use with the testbench.
+- [Makefile](Makefile) - Simplify running the testbench + visualizing it with GTKWave. Syntax for a VHDL testbench is added, but is not yet supported.
 
 ## Example use case
 
 A typical mapping could look like:
 - `0x9000_xxxx` -> Slave 0
 - `0x9001_xxxx` -> Slave 1
+
+## Instructions to Run the Makefile
+- Running the SystemVerilog testbench:\
+```make sim-sv```
+- Running the VHDL testbench:\
+```make sim-vhdl```
+- Viewing the waveform using GTKWave: (Run either of the above two commands before to generate the .vcd file required)\
+```make waves```
+- Cleaning everything:\
+```make clean```
 
 ## Notes
 
