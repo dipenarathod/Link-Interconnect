@@ -2,6 +2,8 @@
 
 A simple Wishbone interconnect that connects **one master** to **two slaves** using address-based slave selection.
 
+Implemented in VHDL and SystemVerilog.
+
 This project was created to connect an NPU (https://github.com/dipenarathod/Wishbone-NPU/tree/main) and an OV5640 Camera Controller (https://github.com/dipenarathod/Wishbone-Camera-Controller-for-OV5640) to the XBUS interface of a NEORV32 (https://github.com/stnolting/neorv32)
 
 ## Overview
@@ -92,9 +94,12 @@ The master return signals depend on the currently latched slave:
 - If slave 1 is active, the master receives `s1_i_wb_data`, `s1_i_wb_ack`, and `s1_i_wb_stall`
 - If no slave is active, the master gets zero data, zero acknowledge, and zero stall
 
-## File
+## Files
 
-- [RTL](RTL) — VHDL source for the interconnect
+- [rtl/vhdl](rtl/vhdl) — VHDL source for the interconnect
+- [rtl/sv](rt;/sv) - SystemVerilog source for the interconnect
+- [tb/wb_1ms2s_interconnect](tb/wb_1ms2s_interconnect.sv) - Testbench for the SystemVerilog implementation of the interconnect. Testbench written in SystemVerilog.
+- [tb/wb_slave_stub](tb/wb_slave_stub.sv) - Simple Wishbone peripheral slave written in SystemVerilog to use with the testbench.
 
 ## Example use case
 
@@ -108,6 +113,7 @@ A typical mapping could look like:
 - The design uses VHDL 2008 with `process(all)` style combinational logic.
 - Request fields are latched so the selected slave sees stable address, data, and write control until acknowledged.
 - `cyc` and `stb` are only asserted toward the selected slave.
+- Wishbone error signal is not supported -> No way to validate if the input address is outside any valid address range inside the interconnect
 
 ## Related Repositories
 - **[Central Tutorial Repository](https://github.com/dipenarathod/NEORV32-NGTTDS-YT-Central-Repository)** - Central repository with links to all relevant websites, repositories, and video guides
