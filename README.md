@@ -16,6 +16,10 @@ The design:
 - Drives only the selected slave's `cyc` and `stb` signals
 - Returns read data, acknowledge, and stall from the selected slave back to the master
 
+## Example Usage
+The following figure shows the system architecture for the NEORV32 + NPU + Camera Controller (for OV5640) system.
+![System Architecture](./block-diagram/complete-system-block-diagram.png)
+
 ## Entity
 
 **Entity name:** `wb_1m2s_interconnect`
